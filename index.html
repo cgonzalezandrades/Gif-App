@@ -32,29 +32,26 @@
                     <input type="submit" class="btn btn-btn-success text-button" value="submit" onclick="submit()"></input>
                 </div>
             </div>
-
-
-
         </header>
 
 
-        <div class="row">
+        <div class="row main-container">
 
             <div class="row">
                 <div id="buttons-gif">
-                    <button data-animal="Hulk">Smash</button>
-                    <button data-animal="Ganondorf"> ugh </button>
-                    <button data-animal="Leonardo Dicaprio">Im the kind of the world</button>
+
                 </div>
 
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10 gif">
+                    <!--
                     <div class="gif">
 
 
                     </div>
+-->
                 </div>
             </div>
 
@@ -66,25 +63,15 @@
 
 
     <script>
-        
-        function submit() {
-            var text = $('#user-input').val().trim();
-            var button = $("<button>");
-
-            button.addClass("animal")
-            button.attr('data-animal', text);
-            button.html(text);
-            $('#buttons-gif').append(button);
-        }
+        $(document).on("click", ".gif-in-page", animateGif);
+        $(document).on("click", 'button', showGif);
 
 
-        $('button').on("click", function() {
+        function showGif() {
 
             $(".gif").empty();
 
             var searchWord = $(this).data('animal');
-
-            console.log(searchWord);
 
             var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + searchWord + "&limit=25&api_key=dc6zaTOxFJmzC&limit=10";
 
@@ -95,55 +82,74 @@
                 .done(function (response) {
                     console.log(response);
 
+                    var $divGif = $("<div>")
+                    var $p = $('<p>');
+                    $p.text("aa");
+
+
+                    console.log($p);
+
+
                     var gif = response.data;
 
 
 
                     for (var i = 0; gif.length > i; i++) {
 
-                        var gifImage = $("<img>").addClass("gif-in-page")
-                            .attr({
-                                "src": gif[i].images.fixed_height_small.url,
-                                "data-still": gif[i].images.fixed_height_small_still.url,
-                                "data-state": 'animate',
-                                "data-animate": gif[i].images.fixed_height_small.url
-                            });
 
-                        $(".gif").append(gifImage);
+                        var $divGif = $("<div>").addClass("col-sm-3");
+                        var $p = $('<p>');
+                        var gifImage = $("<img>").addClass("gif-in-page").attr({
+                            "src": gif[i].images.fixed_height_small.url,
+                            "data-still": gif[i].images.fixed_height_small_still.url,
+                            "data-state": 'animate',
+                            "data-animate": gif[i].images.fixed_height_small.url
+                        });
+
+
+                        $p.text("The rating is " + gif[i].rating);
+
+
+
+
+
+                        $divGif.append(gifImage);
+                        $divGif.append($p);
+
+                        $(".gif").append($divGif);
+
                     }
-
-
-                    $(".gif-in-page").on("click", function () {
-
-
-                        var state = $(this).attr('data-state');
-                        console.log(state);
-
-                        if (state === 'animate') {
-                            $(this).attr({
-                                'src': $(this).data('still'),
-                                "data-state": 'still'
-                            });
-                        }
-                        if (state === 'still') {
-                            $(this).attr({
-                                'src': $(this).data('animate'),
-                                'data-state': 'animate'
-                            });
-                        }
-                    })
-
                 });
-            
-            
-        });
-        
-        $(document).on('click', '.animal', showMe);
-        
-        function showMe(){
-            console.log("This button says hello");
         }
-        
+
+        function animateGif() {
+
+            var state = $(this).attr('data-state');
+            console.log(state);
+
+            if (state === 'animate') {
+                $(this).attr({
+                    'src': $(this).data('still'),
+                    "data-state": 'still'
+                });
+            }
+            if (state === 'still') {
+                $(this).attr({
+                    'src': $(this).data('animate'),
+                    'data-state': 'animate'
+                });
+            }
+        }
+
+        function submit() {
+            var text = $('#user-input').val().trim();
+            var button = $("<button>");
+
+            button.addClass("animal")
+            button.attr('data-animal', text);
+            button.html(text);
+            $('#buttons-gif').append(button);
+        }
     </script>
 
 </body>
