@@ -6,8 +6,9 @@
     <title>Gif Page!</title>
 
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css">
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -15,30 +16,40 @@
 
     <div class="container-fluid">
 
-
-        <!-- Jumbotron -->
+        <!-- Jumbotron heading. This includes the text area and the submit button -->
         <header>
-            <div class="jumbotron header-gif">
-                <h1>iGif</h1>
-                <div class="row">
-                    <form>
-                        Add a text
-                        <br>
-                        <input type="text" name="user-text" id="user-input" value="">
-                    </form>
-                </div>
+            <div class="jumbotron header-gif  ">
 
-                <div class="row">
-                    <input type="submit" class="btn btn-btn-success text-button" value="submit" onclick="submit()"></input>
+                <div id="user-area">
+                     
+                    <h1>PokeGif</h1>
+                    <div class="row">
+                        <form>
+                            <span id="text-input">Add an Pokemon</span>
+                            <br>
+                            <input type="text" name="user-text" id="user-input" value="">
+                        </form>
+                    </div>
+
+                    <div class="row" id="button-submit">
+                        <input type="submit" class="btn btn-btn-success text-button" value="submit" onclick="submit()"></input>
+                    </div>
+               <div class="bg"> </div>
                 </div>
             </div>
         </header>
 
-
+    
         <div class="row main-container">
 
             <div class="row">
                 <div id="buttons-gif">
+                    <button class=" btn-pokemon btn btn-btn-success animal" data-animal="charmander">Charmander</button>
+                    <button class="animal btn-pokemon btn btn-btn-success" data-animal="bulbasaur">Bulbasaur</button>
+                    <button class="btn-pokemon btn btn-btn-success animal" data-animal="ekans">Ekans</button>
+                    <button class="btn-pokemon btn btn-btn-success animal" data-animal="jigglypuff">Jiglipuff</button>
+                    <button class="btn-pokemon btn btn-btn-success animal" data-animal="blastoise">Blastoise</button>
+                    <button class="btn-pokemon btn btn-btn-success animal" data-animal="charizard">Charizard</button>
 
                 </div>
 
@@ -46,111 +57,16 @@
 
             <div class="row">
                 <div class="col-md-10 gif">
-                    <!--
-                    <div class="gif">
-
-
-                    </div>
--->
+                     </div>
                 </div>
             </div>
 
         </div>
-    </div>
+        </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
-
-
-    <script>
-        $(document).on("click", ".gif-in-page", animateGif);
-        $(document).on("click", 'button', showGif);
-
-
-        function showGif() {
-
-            $(".gif").empty();
-
-            var searchWord = $(this).data('animal');
-
-            var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + searchWord + "&limit=25&api_key=dc6zaTOxFJmzC&limit=10";
-
-            $.ajax({
-                    url: queryURL,
-                    method: 'GET'
-                })
-                .done(function (response) {
-                    console.log(response);
-
-                    var $divGif = $("<div>")
-                    var $p = $('<p>');
-                    $p.text("aa");
-
-
-                    console.log($p);
-
-
-                    var gif = response.data;
-
-
-
-                    for (var i = 0; gif.length > i; i++) {
-
-
-                        var $divGif = $("<div>").addClass("col-sm-3");
-                        var $p = $('<p>');
-                        var gifImage = $("<img>").addClass("gif-in-page").attr({
-                            "src": gif[i].images.fixed_height_small.url,
-                            "data-still": gif[i].images.fixed_height_small_still.url,
-                            "data-state": 'animate',
-                            "data-animate": gif[i].images.fixed_height_small.url
-                        });
-
-
-                        $p.text("The rating is " + gif[i].rating);
-
-
-
-
-
-                        $divGif.append(gifImage);
-                        $divGif.append($p);
-
-                        $(".gif").append($divGif);
-
-                    }
-                });
-        }
-
-        function animateGif() {
-
-            var state = $(this).attr('data-state');
-            console.log(state);
-
-            if (state === 'animate') {
-                $(this).attr({
-                    'src': $(this).data('still'),
-                    "data-state": 'still'
-                });
-            }
-            if (state === 'still') {
-                $(this).attr({
-                    'src': $(this).data('animate'),
-                    'data-state': 'animate'
-                });
-            }
-        }
-
-        function submit() {
-            var text = $('#user-input').val().trim();
-            var button = $("<button>");
-
-            button.addClass("animal")
-            button.attr('data-animal', text);
-            button.html(text);
-            $('#buttons-gif').append(button);
-        }
-    </script>
+        <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+    
+    <script src="assets/Javascript/app.js" type="text/javascript"></script>
 
 </body>
 
