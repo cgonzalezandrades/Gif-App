@@ -6,6 +6,8 @@
     <title>Gif Page!</title>
 
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css">
+  
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Baloo+Thambi|Carter+One" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css">
@@ -25,7 +27,7 @@
                     <h1>PokeGif</h1>
                     <div class="row">
                         <form>
-                            <span id="text-input">Add an Pokemon</span>
+                            <span id="text-input">Add a new Pokemon button</span>
                             <br>
                             <input type="text" name="user-text" id="user-input" value="">
                         </form>
@@ -34,7 +36,11 @@
                     <div class="row" id="button-submit">
                         <input type="submit" class="btn btn-btn-success text-button" value="submit" onclick="submit()"></input>
                     </div>
-               <div class="bg"> </div>
+               <div class=" col-sm-12" id="hint"> 
+              <h3> Click a Gif to stop the animation</h3>
+              </div>
+              
+              
                 </div>
             </div>
         </header>
@@ -56,7 +62,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-10 gif">
+                <div class="col-md-12 gif">
                      </div>
                 </div>
             </div>
