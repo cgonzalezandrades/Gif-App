@@ -1,7 +1,7 @@
+var apiKey = key;
 
-            $(document).on("click", ".gif-in-page", animateGif);
+$(document).on("click", ".gif-in-page", animateGif);
             $(document).on("click", 'button', showGif);
-
 
 //showGif run the API and appends the gif the HTML 
             function showGif() {
@@ -9,8 +9,9 @@
                 $(".gif").empty();
 
                 var searchWord = $(this).data('animal');
-
-                var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + searchWord + "&limit=25&api_key=dc6zaTOxFJmzC&limit=10";
+          
+              
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + searchWord + "&limit=25&api_key=" + apiKey;
 
                 $.ajax({
                         url: queryURL,
