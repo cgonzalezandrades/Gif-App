@@ -82,7 +82,7 @@ function submit() {
 
   if (!$('#user-input').val()) {
     
-    $('#text-input').html("I see you left the box empty. Maybe you dont like Pokemons ? Why dont you try something else then...").css("color","rgba(61, 103, 157, 0.9")
+    $('#text-input').html("<h5>I see you left the box empty. Maybe you dont like Pokemons ? Why dont you try something else then...</h5>").css("color","rgba(61, 103, 157, 0.9")
     
   } else {
 
